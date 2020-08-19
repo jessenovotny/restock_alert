@@ -7,7 +7,7 @@
 #
 # set :output, "/path/to/my/cron_log.log"
 #
-every 3.minutes do
+every 5.minutes do
   rake "check_for_updates"
 end
 #
