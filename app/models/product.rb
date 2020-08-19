@@ -12,7 +12,7 @@ class Product < Airrecord::Table
 
   ALERT_DURATION = 15 # minutes
 
-  %w(url keyword keyword_count alerting alert_series_started_at).each do |attribute|
+  %w(url keyword keyword_count alerting alert_series_started_at).each dcap|attribute|
     define_method(attribute) do
       self[attribute]
     end
@@ -23,7 +23,6 @@ class Product < Airrecord::Table
   end
 
   def check
-    binding.pry
     puts "checking: #{self.url}"
     alert if keyword_count && keyword_count != current_keword_count
     set_keyword_count unless keyword_count
