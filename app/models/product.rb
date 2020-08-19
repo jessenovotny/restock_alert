@@ -26,6 +26,8 @@ class Product < Airrecord::Table
     puts "checking: #{self.url}"
     alert if keyword_count && keyword_count != current_keword_count
     set_keyword_count unless keyword_count
+  rescue
+    TwilioClient.sms "Something Broke: #{url}"
   end
 
   def set_keyword_count
@@ -53,6 +55,7 @@ class Product < Airrecord::Table
   end
 
   def web_page
+    binding.pry
     @web_page ||= Nokogiri::HTML(open(url))
   end
 end
