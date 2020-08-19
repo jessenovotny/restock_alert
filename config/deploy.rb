@@ -1,4 +1,4 @@
-set :application, "restorck_alert"
+set :application, "restock_alert"
 set :repo_url, "git@github.com:jessenovotny/restock_alert.git"
 
 # Deploy to the user's home directory
