@@ -25,7 +25,7 @@ class Product < Airrecord::Table
   def check
     alert if keyword_count && keyword_count != current_keword_count
     set_keyword_count unless keyword_count
-    puts "checking: #{self.url}"
+    puts "CHECKING: #{self.url}"
   rescue => e
     TwilioClient.sms "ERROR: #{e.message}|| URL: #{url}"
   end
@@ -35,6 +35,7 @@ class Product < Airrecord::Table
   end
 
   def alert
+    puts "ALERTING: #{self.url}"
     send_text
     set_keyword_count
     self.alert_series_started_at ||= Time.now
