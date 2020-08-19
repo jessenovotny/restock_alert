@@ -23,6 +23,7 @@ class Product < Airrecord::Table
   end
 
   def check
+    puts "checking: #{self.url}"
     alert if keyword_count && keyword_count != current_keword_count
     set_keyword_count unless keyword_count
   end
