@@ -29,6 +29,7 @@ class Product < Airrecord::Table
   def check
     alert if keyword_count.present? && keyword_count != current_keword_count
     set_keyword_count if keyword_count.blank?
+    self.updated_at = Time.now
     save
     puts "CHECKING: #{self.url}"
   rescue => e
@@ -43,6 +44,7 @@ class Product < Airrecord::Table
     puts "ALERTING: #{self.url}"
     send_text
     set_keyword_count
+    self.last_alerted_at = Time.now
     # self.alert_series_started_at ||= Time.now
     # self.alerting = (Time.now - alert_series_started_at) < ALERT_DURATION.minutes
   end
