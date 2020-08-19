@@ -16,7 +16,7 @@ class Product < Airrecord::Table
 
   ALERT_DURATION = 15 # minutes
 
-  %w(url keyword keyword_count alerting alert_series_started_at).each do |attribute|
+  %w(url keyword keyword_count alerting alert_series_started_at updated_at last_alerted_at).each do |attribute|
     define_method(attribute) do
       self[attribute]
     end
