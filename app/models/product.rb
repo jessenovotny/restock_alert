@@ -5,7 +5,7 @@ class Product < Airrecord::Table
   def self.due_for_check
     all.select do |r|
       r['alerting'].present? ||
-        r['alert_series_started_at'].empty? ||
+        r['alert_series_started_at'].blank? ||
         Time.parse(r['alert_series_started_at']) < 1.day.ago
     end
   end
@@ -23,6 +23,7 @@ class Product < Airrecord::Table
   end
 
   def check
+    binding.pry
     puts "checking: #{self.url}"
     alert if keyword_count && keyword_count != current_keword_count
     set_keyword_count unless keyword_count
