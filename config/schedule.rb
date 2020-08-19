@@ -8,7 +8,7 @@
 # set :output, "/path/to/my/cron_log.log"
 #
 every 5.minutes do
-  rake "check_for_updates"
+  # rake "check_for_updates"
 end
 #
 # every 4.days do
