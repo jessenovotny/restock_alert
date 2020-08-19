@@ -28,7 +28,7 @@ class Product < Airrecord::Table
     save
     puts "CHECKING: #{self.url}"
   rescue => e
-    TwilioClient.sms "ERROR: #{e.message}|| URL: #{url}"
+    TwilioClient.sms "ERROR: #{e.message}|| URL: #{url}" if Rails.env.development?
   end
 
   def set_keyword_count
