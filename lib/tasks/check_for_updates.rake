@@ -1,3 +1,3 @@
 task check_for_updates: :environment do
-  Product.all.each &:check
+  Product.check_for_updates
 end
