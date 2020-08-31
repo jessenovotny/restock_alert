@@ -25,7 +25,6 @@ class Product < Airrecord::Table
     alert if keyword_count.present? && keyword_count != current_keword_count
     self.keyword_count = current_keword_count if keyword_count.blank?
     self.updated_at = Time.now
-    save
   rescue => e
     puts e.message
     puts self.url
