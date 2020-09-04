@@ -9,7 +9,7 @@ class TwilioClient
   def self.sms(text)
     client.messages.create(
       from: '+18573016128',
-      to: '+18186062469',
+      to: ['+18186062469', '+19165021002'],
       body: text
     )
   end
