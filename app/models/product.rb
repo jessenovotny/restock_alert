@@ -49,22 +49,15 @@ class Product < Airrecord::Table
 
   def alert
     # puts "ALERTING: #{self.url}"
-    send_text
+    recipients&.each do |r|
+      r.send_text(url)
+    end
     self.keyword_count = current_keword_count
     self.last_alerted_at = Time.now
   end
 
-  def send_text
-    TwilioClient.sms(url, phone_numbers)
-    recipients&.each{ |r| r.update_last_alerted_at }
-  end
-
-  def phone_numbers
-    recipients&.map(&:phone) || '+1 818-606-2469'
-  end
-
   def recipients
-    @recipients ||= User.by_type(type) if Rails.env.production?
+    @recipients ||= Rails.env.production? ? User.by_type(type) : [User.master]
   end
 
   def current_keword_count

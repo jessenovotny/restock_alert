@@ -9,6 +9,7 @@ class User < Airrecord::Table
     primers
     ammo
     last_alerted_at
+    last_alert_url
   ).each do |attribute|
     define_method(attribute) do
       self[attribute]
@@ -23,8 +24,18 @@ class User < Airrecord::Table
     all(filter: "NOT({#{type}} = '')")
   end
 
-  def update_last_alerted_at
+  def self.master
+    all.find{ |u| u.name == 'jesse' }
+  end
+
+  def update_last_alerted url
+    self.last_alert_url = url
     self.last_alerted_at = Time.now
     self.save
+  end
+
+  def send_text url
+    TwilioClient.sms(url, phone)
+    update_last_alerted(url)
   end
 end
