@@ -1,70 +1,40 @@
-class Product < Airrecord::Table
-  self.base_key = ENV['AIRTABLE_APP_KEY']
-  self.table_name = 'tbl7bAvgvC5N4HaIn'
-
-  # attr reader/writer defs
-  %w(
-    url
-    keyword
-    keyword_count
-    alerting
-    alert_series_started_at
-    updated_at
-    last_alerted_at
-    last_error_at
-    last_error
-    type
-  ).each do |attribute|
-    define_method(attribute) do
-      self[attribute]
-    end
-
-    define_method(attribute + "=") do |new_value|
-      self[attribute] = new_value
-    end
-  end
-
-  def self.find_by_url url
-    all(filter: "{url} = '#{url}'").first
-  end
-
-  def self.check_for_updates
-    all.each &:check
-  end
-
-  def check
-    # puts "CHECKING: #{self.url}"
-    alert if self.keyword_count.present? && self.keyword_count != current_keword_count
-    self.keyword_count = current_keword_count if self.keyword_count.blank?
-    self.updated_at = Time.now
-  rescue => e
-    # puts e.message
-    # puts self.url
-    self.last_error_at = Time.now
-    self.last_error = e.message
-    # TwilioClient.sms "#{e.class}: #{e.message}|| URL: #{url}" if Rails.env.development?
-  ensure
-    save
-  end
-
-  def alert
-    # puts "ALERTING: #{self.url}"
-    recipients&.each do |r|
-      r.send_text(url)
-    end
-    self.keyword_count = current_keword_count
-    self.last_alerted_at = Time.now
-  end
-
-  def recipients
-    @recipients ||= Rails.env.production? ? User.by_type(type) : [User.master]
-  end
-
-  def current_keword_count
-    @current_keword_count ||= html.downcase.scan(/#{keyword.downcase}/).count
-  end
-
-  def html
-    RestClient.get(url).body
-  end
+class Product
+  ALL = {
+    cci: {
+      small_rifle: {
+        info: 'CCI No. 400',
+        img: 'https://scheels.scene7.com/is/image/Scheels/07668350013?wid=400&hei=400&qlt=50'
+      },
+      small_rifle_mangum: {
+        info: 'CCI No. 450',
+        img: 'https://www.precisionreloading.com/img/products/CCI/CCI%20450%20Small%20Rifle%20Magnum%20Primers.jpg'
+      },
+      small_rifle_match: {
+        info: 'CCI No. BR4 BR-4',
+        img: 'https://cdn11.bigcommerce.com/s-dlp5xwiggc/products/69418/images/111983/076683000194__01184.1594663547.386.513.jpg?c=2'
+      },
+      small_rifle_aps: {
+        info: 'CCI No. 400 APS',
+        img: 'https://media.mwstatic.com/product-images/src/Primary/375/375560.jpg'
+      }
+    },
+    federal: {
+      small_rifle: {
+        info: 'Federal 205',
+        img: 'https://www.midsouthshooterssupply.com/images/product_images/129-205/129-205.jpg'
+      },
+    },
+    # winchester: {
+    #   pistol: {
+    #   },
+    #   rifle: {
+    #   }
+    # },
+    # remington: {
+    #   pistol: {
+    #   },
+    #   rifle: {
+    #   }
+    # }
+  }.with_indifferent_access
 end
