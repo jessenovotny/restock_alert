@@ -5,7 +5,7 @@ class Product
         info: 'CCI No. 400',
         img: 'https://scheels.scene7.com/is/image/Scheels/07668350013?wid=400&hei=400&qlt=50'
       },
-      small_rifle_mangum: {
+      small_rifle_magnum: {
         info: 'CCI No. 450',
         img: 'https://www.precisionreloading.com/img/products/CCI/CCI%20450%20Small%20Rifle%20Magnum%20Primers.jpg'
       },
