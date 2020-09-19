@@ -56,7 +56,7 @@ class GunBroker
       IsFFLRequired: false,
       ListingDuration: 5,
       PaymentMethods: PAYMENT_METHODS,
-      PictureURLs: [ 'https://s3.amazonaws.com/backup-talend.appcohesion.io/DistributorMedia_S3/MSSBR-2NSQZKHI_LIP_MB65035.jpg' ],
+      PictureURLs: [ 'https://s3.amazonaws.com/backup-talend.appcohesion.io/DistributorMedia_S3/MSSBR-2NSQZKHI_LIP_MB65035.jpg' ], # listing.img_url
       Quantity: 1,
       PostalCode: 85282,
       ShippingClassCosts: { Priority: 10.00 },
@@ -77,25 +77,3 @@ class GunBroker
   end
 
 end
-
-
-# payload= {
-#       CategoryID: 3016, # Reloading Supplies
-#       CollectTaxes: false,
-#       Condition: 1, # Factory
-#       CountryCode: 'US',
-#       Description: listing.description,
-#       InspectionPeriod: 1, # AS/IS no returns
-#       IsFFLRequired: false,
-#       ListingDuration: 5,
-#       PaymentMethods: { FreedomCoin: true },
-#       PictureURLs: [ listing.img_url ],
-#       Quantity: 1,
-#       PostalCode: 85282,
-#       ShippingClassCosts: { Priority: 10.00 },
-#       ShippingClassesSupported: { Priority: true },
-#       StartingBid: 0.01,
-#       Title: listing.title,
-#       WhoPaysForShipping: 8, # Buyer pays fixed amount
-#       WillShipInternational: false
-#     }.to_json
