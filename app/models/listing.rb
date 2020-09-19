@@ -24,7 +24,7 @@ class Listing < Airrecord::Table
   def sync
     return if gun_broker_id
     listing = GunBroker.create_listing(self)
-    self.gun_broker_id = listing['gunbroker_id']
+    self.gun_broker_id = listing['id']
     save
   end
 

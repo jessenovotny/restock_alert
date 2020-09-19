@@ -24,6 +24,12 @@ class Product
         img: 'https://www.midsouthshooterssupply.com/images/product_images/129-205/129-205.jpg'
       },
     },
+    # foo: {
+    #   bar: {
+    #     info: 'Test Listing',
+    #     img: 'https://s3.amazonaws.com/backup-talend.appcohesion.io/DistributorMedia_S3/MSSBR-2NSQZKHI_LIP_MB65035.jpg'
+    #   }
+    # }
     # winchester: {
     #   pistol: {
     #   },
