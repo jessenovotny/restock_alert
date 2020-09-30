@@ -13,8 +13,8 @@ class Product
         info: 'CCI No. BR4 BR-4',
         img: 'https://cdn11.bigcommerce.com/s-dlp5xwiggc/products/69418/images/111983/076683000194__01184.1594663547.386.513.jpg?c=2'
       },
-      small_rifle_aps: {
-        info: 'CCI No. 400 APS',
+      small_pistol_aps: {
+        info: 'CCI No. 500 APS Strips',
         img: 'https://media.mwstatic.com/product-images/src/Primary/375/375560.jpg'
       }
     },
