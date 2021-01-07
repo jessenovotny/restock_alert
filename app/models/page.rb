@@ -29,14 +29,13 @@ class Page < Airrecord::Table
   end
 
   def self.check_for_updates
-    all.each &:check
+    all(sort: { "url" => "asc" }).each &:check
   end
 
   def check
     # puts "CHECKING: #{self.url}"
     alert if self.keyword_count.present? && self.keyword_count != current_keyword_count
     self.keyword_count = current_keyword_count if self.keyword_count.blank?
-    self.updated_at = Time.now
   rescue => e
     # puts e.message
     # puts self.url
@@ -44,6 +43,7 @@ class Page < Airrecord::Table
     self.last_error = e.message
     # TwilioClient.sms "#{e.class}: #{e.message}|| URL: #{url}" if Rails.env.development?
   ensure
+    self.updated_at = Time.now
     save
   end
 
