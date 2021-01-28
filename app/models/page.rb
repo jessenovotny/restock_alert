@@ -34,8 +34,8 @@ class Page < Airrecord::Table
 
   def check
     # puts "CHECKING: #{self.url}"
-    alert if self.keyword_count.present? && self.keyword_count != current_keyword_count
-    self.keyword_count = current_keyword_count if self.keyword_count.blank?
+    alert if self.keyword_count.present? && self.keyword_count > current_keyword_count
+    self.keyword_count = current_keyword_count
   rescue => e
     # puts e.message
     # puts self.url
@@ -52,7 +52,6 @@ class Page < Airrecord::Table
     recipients&.each do |r|
       r.send_text(url)
     end
-    self.keyword_count = current_keyword_count
     self.last_alerted_at = Time.now
   end
 
