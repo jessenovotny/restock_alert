@@ -13,6 +13,6 @@ task check_mvps: :environment do
   end.each &:join
 end
 
-task :test do
+task test: :environment do
   puts 'TEST COMPLETE'
 end
